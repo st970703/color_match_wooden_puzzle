@@ -12,16 +12,13 @@ class Tile:
     id: uuid.UUID = field(default_factory=uuid.uuid4)
 
     def rotate_cw_90(self):
+        existing_right = self.right
         self.right = self.top
-        self.bottom = self.right
-        self.left = self.bottom
-        self.top = self.left
-
-    def rotate_acw_90(self):
-        self.top = self.right
-        self.bottom = self.left
-        self.left = self.top
-        self.right = self.bottom
+        existing_bottom = self.bottom
+        self.bottom = existing_right
+        existing_left = self.left
+        self.left = existing_bottom
+        self.top = existing_left
 
 
 @dataclass
