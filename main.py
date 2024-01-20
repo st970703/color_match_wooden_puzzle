@@ -2,13 +2,10 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-import uuid
-from dataclasses import dataclass
 
 from colours import Colour
 from solve import solve_puzzle
-from tile import Tile, Diamond, PuzzleShape
-
+from tile import Tile
 
 if __name__ == '__main__':
     tile_0 = Tile(top=Colour.RED, left=Colour.YELLOW, right=Colour.BLUE, bottom=Colour.GREEN)
