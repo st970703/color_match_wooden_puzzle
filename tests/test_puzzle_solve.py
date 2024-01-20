@@ -61,6 +61,16 @@ class TestPuzzleSolve:
         make_eight_tiles: list[Tile]
     ) -> None:
         results = solve_puzzle(make_eight_tiles)
+        assert len(results) > 0
 
         for result in results:
             assert_the_puzzle_is_solved(result)
+
+    def test_tile_rotation(self):
+        tile = Tile(top=Colour.RED, left=Colour.YELLOW, right=Colour.BLUE, bottom=Colour.GREEN)
+        tile.rotate_cw_90()
+
+        assert tile.top == Colour.YELLOW
+        assert tile.right == Colour.RED
+        assert tile.bottom == Colour.BLUE
+        assert tile.left == Colour.GREEN
