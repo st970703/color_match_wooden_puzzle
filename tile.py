@@ -1,7 +1,6 @@
 import uuid
 from dataclasses import dataclass, field
 from colours import Colour
-from enum import Enum, auto
 
 @dataclass
 class Tile:
@@ -23,3 +22,20 @@ class Tile:
         self.bottom = self.left
         self.left = self.top
         self.right = self.bottom
+
+
+@dataclass
+class Diamond:
+    # Visualise this as a square rotated 45 degrees
+    top: Tile
+    bottom: Tile
+    left: Tile
+    right: Tile
+
+@dataclass
+class PuzzleShape:
+    diamond: Diamond
+    left_edge_top: Tile
+    left_edge_bottom: Tile
+    right_edge_top: Tile
+    right_edge_bottom: Tile
