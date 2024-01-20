@@ -60,7 +60,8 @@ def solve_diamond_left_edge_tiles(
     :return:
     """
     # Base case
-    left_tile_of_diamond = two_by_two_diamond[3]
+    index_for_diamond_left = 3
+    left_tile_of_diamond = two_by_two_diamond[index_for_diamond_left]
     satisfies_diamond_edge_constraints = (
         len(path) == NUM_OF_TILES_FOR_DIAMOND_EDGE
         and left_tile_of_diamond.top == path[0].right
@@ -112,7 +113,8 @@ def solve_diamond_right_edge_tiles(
     :return:
     """
     # Base case
-    right_tile_of_diamond = two_by_two_diamond[1]
+    index_for_diamond_right = 1
+    right_tile_of_diamond = two_by_two_diamond[index_for_diamond_right]
     satisfies_diamond_edge_constraints = (
         len(path) == NUM_OF_TILES_FOR_DIAMOND_EDGE
         and right_tile_of_diamond.top == path[0].left
