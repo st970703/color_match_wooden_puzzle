@@ -1,19 +1,19 @@
 import pytest
 
 from colours import Colour
-from solve import solve_puzzle
-from tile import Tile, PuzzleShape
+from solve import solve_puzzle, solve_central_2_by_2_diamond
+from tile import Tile, PuzzleShape, Diamond
 
 
-def assert_the_two_by_two_diamond_is_solved(puzzle_shape: PuzzleShape):
-    assert puzzle_shape.diamond.top.right == puzzle_shape.diamond.right.top
-    assert puzzle_shape.diamond.top.bottom == puzzle_shape.diamond.right.left
-    assert puzzle_shape.diamond.right.left == puzzle_shape.diamond.bottom.top
-    assert puzzle_shape.diamond.right.bottom == puzzle_shape.diamond.bottom.right
-    assert puzzle_shape.diamond.bottom.top == puzzle_shape.diamond.left.right
-    assert puzzle_shape.diamond.bottom.left == puzzle_shape.diamond.left.bottom
-    assert puzzle_shape.diamond.left.top == puzzle_shape.diamond.top.left
-    assert puzzle_shape.diamond.left.right == puzzle_shape.diamond.top.bottom
+def assert_the_two_by_two_diamond_is_solved(diamond: Diamond):
+    assert diamond.top.right == diamond.right.top
+    assert diamond.top.bottom == diamond.right.left
+    assert diamond.right.left == diamond.bottom.top
+    assert diamond.right.bottom == diamond.bottom.right
+    assert diamond.bottom.top == diamond.left.right
+    assert diamond.bottom.left == diamond.left.bottom
+    assert diamond.left.top == diamond.top.left
+    assert diamond.left.right == diamond.top.bottom
 
 def assert_the_left_edge_tiles_are_solved(puzzle_shape: PuzzleShape):
     assert puzzle_shape.left_edge_top.right == puzzle_shape.diamond.left.top
@@ -28,7 +28,7 @@ def assert_the_right_edge_tiles_are_solved(puzzle_shape: PuzzleShape):
     assert puzzle_shape.right_edge_bottom.left == puzzle_shape.diamond.right.bottom
 
 def assert_the_puzzle_is_solved(puzzle_shape: PuzzleShape):
-    assert_the_two_by_two_diamond_is_solved(puzzle_shape)
+    assert_the_two_by_two_diamond_is_solved(puzzle_shape.diamond)
     assert_the_left_edge_tiles_are_solved(puzzle_shape)
     assert_the_right_edge_tiles_are_solved(puzzle_shape)
 
@@ -74,3 +74,20 @@ class TestPuzzleSolve:
         assert tile.right == Colour.RED
         assert tile.bottom == Colour.BLUE
         assert tile.left == Colour.GREEN
+
+
+    def test_solve_central_2_by_2_diamond(
+        self,
+        make_eight_tiles: list[Tile]
+    ):
+        two_by_two_diamonds: list[list[Tile]] = []
+        solve_central_2_by_2_diamond(
+            tiles=make_eight_tiles,
+            results=two_by_two_diamonds
+        )
+
+        assert len(two_by_two_diamonds) > 0
+
+        for tiles in two_by_two_diamonds:
+            diamond = Diamond(top=tiles[0], right=tiles[1], bottom=tiles[2], left=tiles[3])
+            assert_the_two_by_two_diamond_is_solved(diamond)
