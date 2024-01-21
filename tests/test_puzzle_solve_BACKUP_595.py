@@ -1,8 +1,13 @@
 import pytest
 
 from colours import Colour
+<<<<<<< HEAD
+from solve import solve_puzzle, solve_central_2_by_2_diamond
+from tile import Tile, PuzzleShape, Diamond
+=======
 from solve import solve_central_2_by_2_diamond, solve_puzzle
 from tile import Diamond, Tile
+>>>>>>> 346a53e8fec7445e85ef6f666824f576630b367d
 
 
 def assert_the_two_by_two_diamond_is_solved(diamond: Diamond):
@@ -24,6 +29,12 @@ def assert_the_left_edge_tiles_are_solved(
     assert left_edge_bottom.top == diamond.left.left
     assert left_edge_bottom.right == diamond.left.bottom
 
+<<<<<<< HEAD
+def assert_the_puzzle_is_solved(puzzle_shape: PuzzleShape):
+    assert_the_two_by_two_diamond_is_solved(puzzle_shape.diamond)
+    assert_the_left_edge_tiles_are_solved(puzzle_shape)
+    assert_the_right_edge_tiles_are_solved(puzzle_shape)
+=======
 
 def assert_the_right_edge_tiles_are_solved(
     right_edge_top: Tile, right_edge_bottom: Tile, diamond: Diamond
@@ -32,6 +43,7 @@ def assert_the_right_edge_tiles_are_solved(
     assert right_edge_top.bottom == diamond.right.right
     assert right_edge_bottom.top == diamond.right.right
     assert right_edge_bottom.left == diamond.right.bottom
+>>>>>>> 346a53e8fec7445e85ef6f666824f576630b367d
 
 
 class TestPuzzleSolve:
@@ -100,16 +112,32 @@ class TestPuzzleSolve:
         assert tile.bottom == Colour.BLUE
         assert tile.left == Colour.GREEN
 
+<<<<<<< HEAD
+
+    def test_solve_central_2_by_2_diamond(
+        self,
+        make_eight_tiles: list[Tile]
+    ):
+        two_by_two_diamonds: list[list[Tile]] = []
+        solve_central_2_by_2_diamond(
+            tiles=make_eight_tiles,
+            results=two_by_two_diamonds
+=======
     def test_solve_central_2_by_2_diamond(self, make_eight_tiles: list[Tile]):
         two_by_two_diamonds: list[list[Tile]] = []
         solve_central_2_by_2_diamond(
             tiles=make_eight_tiles, results=two_by_two_diamonds
+>>>>>>> 346a53e8fec7445e85ef6f666824f576630b367d
         )
 
         assert len(two_by_two_diamonds) > 0
 
         for tiles in two_by_two_diamonds:
+<<<<<<< HEAD
+            diamond = Diamond(top=tiles[0], right=tiles[1], bottom=tiles[2], left=tiles[3])
+=======
             diamond = Diamond(
                 top=tiles[0], right=tiles[1], bottom=tiles[2], left=tiles[3]
             )
+>>>>>>> 346a53e8fec7445e85ef6f666824f576630b367d
             assert_the_two_by_two_diamond_is_solved(diamond)

@@ -1,6 +1,8 @@
 import uuid
 from dataclasses import dataclass, field
+
 from colours import Colour
+
 
 @dataclass
 class Tile:
@@ -28,6 +30,7 @@ class Diamond:
     bottom: Tile
     left: Tile
     right: Tile
+
 
 @dataclass
 class PuzzleShape:
