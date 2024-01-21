@@ -19,7 +19,9 @@ def check_if_satisfies_2_by_2_diamond_constraints(path: list[Tile]) -> bool:
     )
 
 
-def solve_central_2_by_2_diamond(tiles: list[Tile], results: list, path: list[Tile] = []):
+def solve_central_2_by_2_diamond(
+    tiles: list[Tile], results: list, path: list[Tile] = []
+):
     """
     Finds the central_2_by_2_diamond.
     Uses backtracking.
@@ -48,12 +50,12 @@ def solve_central_2_by_2_diamond(tiles: list[Tile], results: list, path: list[Ti
             # Unchoose (backtrack)
             path.pop()
 
+
 NUM_OF_TILES_FOR_DIAMOND_EDGE = 2
 
 
 def check_if_satisfies_diamond_left_edge_constraints(
-    path: list[Tile],
-    left_tile_of_diamond: Tile
+    path: list[Tile], left_tile_of_diamond: Tile
 ) -> bool:
     return (
         len(path) == NUM_OF_TILES_FOR_DIAMOND_EDGE
@@ -65,10 +67,7 @@ def check_if_satisfies_diamond_left_edge_constraints(
 
 
 def solve_diamond_left_edge_tiles(
-    tiles: list[Tile],
-    left_tile_of_diamond: Tile,
-    results: list,
-    path: list[Tile] = []
+    tiles: list[Tile], left_tile_of_diamond: Tile, results: list, path: list[Tile] = []
 ):
     """
     Solve the two edge tiles for
@@ -89,8 +88,7 @@ def solve_diamond_left_edge_tiles(
             for num_of_rotations in range(0, 4):
                 path[index_in_path].rotate_cw_90()
                 if check_if_satisfies_diamond_left_edge_constraints(
-                    path=path,
-                    left_tile_of_diamond=left_tile_of_diamond
+                    path=path, left_tile_of_diamond=left_tile_of_diamond
                 ):
                     results.append(path.copy())
     # Recursive case
@@ -104,7 +102,7 @@ def solve_diamond_left_edge_tiles(
                 tiles=tiles,
                 left_tile_of_diamond=left_tile_of_diamond,
                 results=results,
-                path=path
+                path=path,
             )
 
             # Unchoose (backtrack)
@@ -112,8 +110,7 @@ def solve_diamond_left_edge_tiles(
 
 
 def check_if_satisfies_diamond_right_edge_constraints(
-    path: list[Tile],
-    right_tile_of_diamond: Tile
+    path: list[Tile], right_tile_of_diamond: Tile
 ) -> bool:
     return (
         len(path) == NUM_OF_TILES_FOR_DIAMOND_EDGE
@@ -125,10 +122,7 @@ def check_if_satisfies_diamond_right_edge_constraints(
 
 
 def solve_diamond_right_edge_tiles(
-    tiles: list[Tile],
-    right_tile_of_diamond: Tile,
-    results: list,
-    path: list[Tile] = []
+    tiles: list[Tile], right_tile_of_diamond: Tile, results: list, path: list[Tile] = []
 ):
     """
     Solve the two edge tiles for
@@ -149,8 +143,7 @@ def solve_diamond_right_edge_tiles(
             for num_of_rotations in range(0, 4):
                 path[index_in_path].rotate_cw_90()
                 if check_if_satisfies_diamond_right_edge_constraints(
-                    path=path,
-                    right_tile_of_diamond=right_tile_of_diamond
+                    path=path, right_tile_of_diamond=right_tile_of_diamond
                 ):
                     results.append(path.copy())
 
@@ -165,7 +158,7 @@ def solve_diamond_right_edge_tiles(
                 tiles=tiles,
                 right_tile_of_diamond=right_tile_of_diamond,
                 results=results,
-                path=path
+                path=path,
             )
 
             # Unchoose (backtrack)
@@ -195,7 +188,9 @@ def solve_puzzle(tiles: list[Tile]) -> list[PuzzleShape]:
             continue
         for left_edge_tiles in lists_of_left_edge_tiles:
             left_edge_tile_ids: set[uuid.UUID] = {tile.id for tile in left_edge_tiles}
-            unused_tiles = [tile for tile in unused_tiles if tile.id not in left_edge_tile_ids]
+            unused_tiles = [
+                tile for tile in unused_tiles if tile.id not in left_edge_tile_ids
+            ]
             lists_of_right_edge_tiles: list[list[Tile]] = []
             index_for_diamond_right = 1
             right_tile_of_diamond = diamond[index_for_diamond_right]

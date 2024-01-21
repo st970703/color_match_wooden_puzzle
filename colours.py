@@ -6,4 +6,3 @@ class Colour(Enum):
     GREEN = auto()
     BLUE = auto()
     YELLOW = auto()
-    

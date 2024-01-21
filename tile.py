@@ -31,6 +31,7 @@ class Diamond:
     left: Tile
     right: Tile
 
+
 @dataclass
 class PuzzleShape:
     diamond: Diamond
