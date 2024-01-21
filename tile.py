@@ -1,6 +1,8 @@
 import uuid
 from dataclasses import dataclass, field
+
 from colours import Colour
+
 
 @dataclass
 class Tile:
